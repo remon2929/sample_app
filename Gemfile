@@ -40,6 +40,8 @@ group :development, :test do
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
   gem 'sqlite3'
+    gem 'guard',                    '2.16.2'
+  gem 'guard-minitest',           '2.4.4'
 end
 
 group :development do
