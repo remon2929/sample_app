@@ -14,6 +14,7 @@ end
 def create
     @user = User.new(params[:user])    # 実装は終わっていないことに注意!
     if @user.save
+      flash[:success] = "Welcome to the Sample App!"
       redirect_to @user
       # 保存の成功をここで扱う。
     else
