@@ -24,6 +24,10 @@ def create
     end
 end
 
+def edit
+    @user = User.find(params[:id])
+end
+
 
   def create
     @user = User.new(user_params)
@@ -39,7 +43,7 @@ end
    def destroy
     log_out
     redirect_to root_url
-  end
+   end
   
   private
 
