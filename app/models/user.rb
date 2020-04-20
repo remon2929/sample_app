@@ -19,6 +19,11 @@ class User < ApplicationRecord
  def self.new_token
     SecureRandom.urlsafe_base64
  end
+ 
+ # ランダムなトークンを返す
+    def new_token
+      SecureRandom.urlsafe_base64
+    end
   
   # 永続セッションのためにユーザーをデータベースに記憶する
   def remember
@@ -30,6 +35,10 @@ class User < ApplicationRecord
   def authenticated?(remember_token)
      return false if remember_digest.nil?
     BCrypt::Password.new(remember_digest).is_password?(remember_token)
+  end
+  
+  def self.new_token
+    SecureRandom.urlsafe_base64
   end
   
   # ユーザーのログイン情報を破棄する
