@@ -16,9 +16,9 @@ class User < ApplicationRecord
   end
   
    # ランダムなトークンを返す
-  def self.new_token
+ def self.new_token
     SecureRandom.urlsafe_base64
-  end
+ end
   
   # 永続セッションのためにユーザーをデータベースに記憶する
   def remember
@@ -33,12 +33,9 @@ class User < ApplicationRecord
   end
   
   # ユーザーのログイン情報を破棄する
-  def forget
+ def forget
     update_attribute(:remember_digest, nil)
-    user.forget
-    cookies.delete(:user_id)
-    cookies.delete(:remember_token)
-  end
+ end
   # 現在のユーザーをログアウトする
   def log_out
     forget(current_user)
