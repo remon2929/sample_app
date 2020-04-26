@@ -17,7 +17,7 @@ attr_accessor :remember_token, :activation_token
   end
   
    # ランダムなトークンを返す
- def self.new_token
+ def User.new_token
     SecureRandom.urlsafe_base64
  end
  
@@ -29,6 +29,9 @@ attr_accessor :remember_token, :activation_token
     update_attribute(:remember_digest, User.digest(remember_token))
   end
 
+ def forget
+    update_attribute(:remember_digest, nil)
+ end
 
 # トークンがダイジェストと一致したらtrueを返す
   def authenticated?(attribute, token)
@@ -37,17 +40,15 @@ attr_accessor :remember_token, :activation_token
     BCrypt::Password.new(digest).is_password?(token)
   end
   
-  # ユーザーのログイン情報を破棄する
- def forget
-    update_attribute(:remember_digest, nil)
- end
+def activate
+    update_attribute(:activated,    true)
+    update_attribute(:activated_at, Time.zone.now)
+end
  
-  # 現在のユーザーをログアウトする
-  def log_out
-    forget(current_user)
-    session.delete(:user_id)
-    @current_user = nil
-  end
+ def send_activation_email
+    UserMailer.account_activation(self).deliver_now
+ end
+
   
    private
 
