@@ -13,6 +13,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     # => app/views/users/show.html.erb
     # debugger
+     @microposts = @user.microposts.paginate(page: params[:page])
   end
 
 
